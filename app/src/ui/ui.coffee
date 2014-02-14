@@ -13,17 +13,15 @@ do (
 
     getInitialState: ->
       columns: 2
-      fakeContent: []
-
-    componentWillMount: ->
-      # generate initial fake content
-      @setColumns 2
 
     setColumns: (count) ->
-      count = Math.max 1, count
-      for index in [0...count]
-        @state.fakeContent[index] or= @_fakeContent()
-      @setState columns: count
+      @setState columns: Math.max 1, count
+
+    fakeContent: (options) ->
+      options or= {}
+      ipsum
+        count: options.count or 1
+        units: options.units or 'paragraphs'
 
     render: ->
       div {},
@@ -34,12 +32,9 @@ do (
 
         div className: 'column-container',
           for index in [0...@state.columns]
-            Column key: index,
-              @state.fakeContent[index]
-
-    _fakeContent: ->
-      ipsum
-        count: 1
-        units: 'paragraphs'
+            Column
+              key: index
+              title: "Column #{index + 1}"
+              fakeContent: @fakeContent
 
   module.exports = UI
