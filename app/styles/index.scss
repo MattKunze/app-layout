@@ -1,6 +1,13 @@
+$color1: #FF530D;
+$color2: #CC841F;
+$color3: #997645;
+$color4: #4CFFB2;
+$color5: #1FCC50;
 
 @import "../../bower_components/bootstrap-sass/lib/bootstrap";
 @import "../../bower_components/bootstrap-sass/lib/theme";
-body {
-  padding: 10px;
-}
+
+@import "../src/ui/header";
+@import "../src/ui/subheader";
+@import "../src/ui/column";
+@import "../src/ui/drawer";

@@ -1,0 +1,17 @@
+.column-container {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+}
+.column-container > .column {
+  display: table-cell;
+
+  & > .column-inner {
+    margin: 5px;
+    padding: 10px;
+    background-color: #eee;
+    border: 1px solid $color3;
+  }
+}
+

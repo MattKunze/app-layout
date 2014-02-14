@@ -1,0 +1,14 @@
+.header {
+  background-color: $color1;
+  height: 50px;
+  padding: 7px 15px;
+  border-bottom: 2px solid $color5;
+
+  & > .title {
+    margin-top: 5px;
+  }
+
+  label {
+    margin-right: 5px;
+  }
+}
