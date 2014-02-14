@@ -1,4 +1,5 @@
 do (
+  ipsum = require 'lorem-ipsum'
   React = require 'react'
   Header = require './header'
   SubHeader = require './subheader'
@@ -12,9 +13,17 @@ do (
 
     getInitialState: ->
       columns: 2
+      fakeContent: []
+
+    componentWillMount: ->
+      # generate initial fake content
+      @setColumns 2
 
     setColumns: (count) ->
-      @setState columns: Math.max 1, count
+      count = Math.max 1, count
+      for index in [0...count]
+        @state.fakeContent[index] or= @_fakeContent()
+      @setState columns: count
 
     render: ->
       div {},
@@ -24,7 +33,13 @@ do (
         SubHeader {}
 
         div className: 'column-container',
-          for index in [1..@state.columns]
-            Column key: index, "Column #{index}"
+          for index in [0...@state.columns]
+            Column key: index,
+              @state.fakeContent[index]
+
+    _fakeContent: ->
+      ipsum
+        count: 1
+        units: 'paragraphs'
 
   module.exports = UI

@@ -9,7 +9,7 @@ do (
 
     render: ->
       div className: 'column',
-        div className: 'column-inner',
+        div className: 'column-inner blokk',
           @props.children
 
   module.exports = Column

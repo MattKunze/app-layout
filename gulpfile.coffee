@@ -23,6 +23,7 @@ server = do lr
 fileset = (base) ->
   base: base
   images: "#{base}/images"
+  fonts: "#{base}/fonts"
   src: "#{base}/src/"
   styles: "#{base}/styles"
 
@@ -73,6 +74,12 @@ gulp.task 'coffee', ->
 gulp.task 'images', ->
   gulp.src "#{app.images}/**/*"
     .pipe gulp.dest "#{dist.images}"
+    .pipe refresh server
+
+# Copies fonts to dest then reloads the page
+gulp.task 'fonts', ->
+  gulp.src "#{app.fonts}/**/*"
+    .pipe gulp.dest "#{dist.fonts}"
     .pipe refresh server
 
 gulp.task 'scripts', ['coffee'], ->
@@ -137,6 +144,7 @@ gulp.task 'livereload', ->
 # Watches files for changes
 gulp.task 'watch', ->
   gulp.watch "#{app.images}/**", ['images']
+  gulp.watch "#{app.fonts}/**", ['fonts']
   gulp.watch "#{app.src}/**", ['scripts', 'test-scripts']
   gulp.watch "#{app.src}/**/*.scss", ['styles']
   gulp.watch "#{app.styles}/**", ['styles']
@@ -153,7 +161,7 @@ gulp.task 'clean', ->
   gulp.src "#{build}", read: false
     .pipe clean force: true
 
-gulp.task 'build-dist', ['build-vendor', 'html', 'images', 'styles', 'scripts']
+gulp.task 'build-dist', ['build-vendor', 'html', 'images', 'fonts', 'styles', 'scripts']
 gulp.task 'build-test', ['test-html', 'test-styles', 'test-scripts']
 
 # Grabs assets from vendors and puts in build/dist/vendor
