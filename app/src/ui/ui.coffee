@@ -13,9 +13,13 @@ do (
 
     getInitialState: ->
       columns: 2
+      compactHeader: false
 
     setColumns: (count) ->
       @setState columns: Math.max 1, count
+
+    setCompact: (compact) ->
+      @setState compactHeader: compact
 
     fakeContent: (options) ->
       options or= {}
@@ -27,8 +31,11 @@ do (
       div {},
         Header
           columns: @state.columns
+          compactHeader: @state.compactHeader
           setColumns: @setColumns
-        SubHeader {}
+        SubHeader
+          compactHeader: @state.compactHeader
+          setCompact: @setCompact
 
         div className: 'column-container',
           for index in [0...@state.columns]

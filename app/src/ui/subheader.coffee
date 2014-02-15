@@ -1,5 +1,6 @@
 do (
-  React = require 'react'
+  React = require 'react/addons'
+  headroom = require 'headroom.js'
 ) ->
 
   { div } = React.DOM
@@ -7,8 +8,22 @@ do (
   SubHeader = React.createClass
     displayName: 'SubHeader'
 
+    componentDidMount: (rootNode) ->
+      headroom = new Headroom rootNode,
+        offset: 50
+        tolerance: 10000
+        onPin: =>
+          @props.setCompact false
+        onUnpin: =>
+          @props.setCompact true
+      headroom.init()
+
     render: ->
-      div className: 'sub-header',
+      classes = React.addons.classSet
+        'sub-header': true
+        compact: @props.compactHeader
+
+      div className: classes,
         'This is the subheader'
 
   module.exports = SubHeader

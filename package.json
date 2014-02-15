@@ -32,6 +32,7 @@
     "mocha": "~1.17.1",
     "event-stream": "~3.1.0",
     "coffee-script": "~1.7.1",
-    "gulp-coffee": "~1.4.1"
+    "gulp-coffee": "~1.4.1",
+    "debowerify": "~0.5.2"
   }
 }

@@ -29,6 +29,7 @@ fileset = (base) ->
 
 browserifyOptions =
   debug: not gutil.env.production
+  transform: [ 'debowerify' ]
 
 vendorAssets = [
   {
