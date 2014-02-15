@@ -3,7 +3,7 @@ do (
   headroom = require 'headroom.js'
 ) ->
 
-  { div } = React.DOM
+  { div, span, a } = React.DOM
 
   SubHeader = React.createClass
     displayName: 'SubHeader'
@@ -24,7 +24,12 @@ do (
         compact: @props.compactHeader
 
       div className: classes,
-        'This is the subheader'
+        div className: 'top-menu',
+          a onClick: @props.scrollTop,
+            span className: 'glyphicon glyphicon-star-empty'
+
+        span className: 'title', 'This is the subheader'
+
 
   module.exports = SubHeader
 

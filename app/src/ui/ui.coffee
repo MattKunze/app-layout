@@ -1,5 +1,7 @@
 do (
+  _ = require 'lodash'
   ipsum = require 'lorem-ipsum'
+  headroom = require 'headroom.js'
   React = require 'react'
   Header = require './header'
   SubHeader = require './subheader'
@@ -27,6 +29,9 @@ do (
         count: options.count or 1
         units: options.units or 'paragraphs'
 
+    scrollTop: ->
+      window.scrollTo 0
+
     render: ->
       div {},
         Header
@@ -36,6 +41,7 @@ do (
         SubHeader
           compactHeader: @state.compactHeader
           setCompact: @setCompact
+          scrollTop: @scrollTop
 
         div className: 'column-container',
           for index in [0...@state.columns]
@@ -45,3 +51,4 @@ do (
               fakeContent: @fakeContent
 
   module.exports = UI
+
