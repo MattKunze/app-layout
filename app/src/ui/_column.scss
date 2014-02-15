@@ -16,3 +16,10 @@
   }
 }
 
+.ui.compact .column-container > .column.pinned {
+  position: fixed;
+  top: 40px;
+  bottom: 0;
+  overflow-y: scroll;
+}
+

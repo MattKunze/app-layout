@@ -8,11 +8,7 @@ do (
     displayName: 'Header'
 
     render: ->
-      classes = React.addons.classSet
-        'header': true
-        compact: @props.compactHeader
-
-      div className: classes,
+      div className: 'header',
         form className: 'form-inline pull-right',
           div className: 'form-group',
             label {}, 'Columns'

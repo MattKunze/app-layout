@@ -19,11 +19,7 @@ do (
       headroom.init()
 
     render: ->
-      classes = React.addons.classSet
-        'sub-header': true
-        compact: @props.compactHeader
-
-      div className: classes,
+      div className: 'sub-header',
         div className: 'top-menu',
           a onClick: @props.scrollTop,
             span className: 'glyphicon glyphicon-star-empty'

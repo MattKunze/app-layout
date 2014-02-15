@@ -33,7 +33,7 @@ do (
       window.scrollTo 0
 
     render: ->
-      div {},
+      div { className: 'ui' + if @state.compactHeader then ' compact' else '' },
         Header
           columns: @state.columns
           compactHeader: @state.compactHeader
