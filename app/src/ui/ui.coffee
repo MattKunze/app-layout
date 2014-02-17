@@ -2,13 +2,14 @@ do (
   _ = require 'lodash'
   ipsum = require 'lorem-ipsum'
   headroom = require 'headroom.js'
-  React = require 'react'
+  React = require 'react/addons'
   Header = require './header'
   SubHeader = require './subheader'
   Column = require './column'
 ) ->
 
   { div } = React.DOM
+  classSet = React.addons.classSet
 
   UI = React.createClass
     displayName: 'UI'
@@ -30,10 +31,14 @@ do (
         units: options.units or 'paragraphs'
 
     scrollTop: ->
-      window.scrollTo 0
+      @_scrollTo document.documentElement, 0, 100
 
     render: ->
-      div { className: 'ui' + if @state.compactHeader then ' compact' else '' },
+      div
+        className: classSet
+          ui: true
+          compact: @state.compactHeader
+      ,
         Header
           columns: @state.columns
           compactHeader: @state.compactHeader
@@ -49,6 +54,18 @@ do (
               key: index
               title: "Column #{index + 1}"
               fakeContent: @fakeContent
+
+    _scrollTo: (element, to, duration) ->
+      return unless duration > 0
+
+      difference = to - element.scrollTop
+      perTick = difference / duration * 10
+
+      setTimeout ( =>
+        element.scrollTop = element.scrollTop + perTick
+        if element.scrollTop > to
+          @_scrollTo element, to, duration - 10
+      ), 10
 
   module.exports = UI
 

@@ -4,6 +4,7 @@ do (
 ) ->
 
   { div, span, button, p } = React.DOM
+  classSet = React.addons.classSet
 
   Column = React.createClass
     displayName: 'Column'
@@ -29,11 +30,17 @@ do (
       @setState content: [ @props.fakeContent() ]
 
     render: ->
-      div { className: 'column' + if @state.pinned then ' pinned' else '' },
+      div
+        className: classSet
+          column: true
+          pinned: @state.pinned
+      ,
         div className: 'column-inner',
           div className: 'btn-group',
             button
-              className: 'btn btn-default' + if @state.pinned then ' active' else ''
+              className: classSet
+                'btn btn-default': true
+                active: @state.pinned
               onClick: @togglePinned
             ,
               span className: 'glyphicon glyphicon-pushpin'
