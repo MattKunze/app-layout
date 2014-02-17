@@ -8,8 +8,8 @@ do (
   SubHeader = React.createClass
     displayName: 'SubHeader'
 
-    componentDidMount: (rootNode) ->
-      headroom = new Headroom rootNode,
+    componentDidMount: ->
+      headroom = new Headroom @getDOMNode(),
         offset: 50
         tolerance: 10000
         onPin: =>
