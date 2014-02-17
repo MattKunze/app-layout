@@ -16,7 +16,7 @@
   }
 }
 
-.ui.compact .column-container > .column.pinned {
+.ui.headroom--unpinned > .column-container > .column.pinned {
   position: fixed;
   top: 40px;
   bottom: 0;

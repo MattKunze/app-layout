@@ -33,6 +33,12 @@ do (
     scrollTop: ->
       @_scrollTo document.documentElement, 0, 100
 
+    componentDidMount: ->
+      headroom = new Headroom @getDOMNode(),
+        offset: 50
+        tolerance: 10000
+      headroom.init()
+
     render: ->
       div
         className: classSet
@@ -45,7 +51,6 @@ do (
           setColumns: @setColumns
         SubHeader
           compactHeader: @state.compactHeader
-          setCompact: @setCompact
           scrollTop: @scrollTop
 
         div className: 'column-container',
