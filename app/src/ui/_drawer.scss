@@ -1,0 +1,15 @@
+.drawer-container {
+  display: table;
+  table-layout: fixed;
+
+  & > .drawer-content,
+  & > .drawer-body {
+    display: table-cell;
+  }
+  & > .drawer-content {
+    background-color: $color4;
+    z-index: 1000;
+    width: 200px;
+  }
+}
+
