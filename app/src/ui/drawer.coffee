@@ -18,12 +18,11 @@ do (
       @_scrollable?.removeEventListener 'mousewheel', @_onMouseWheel
 
     render: ->
-      openClass = if @props.open
-        " #{@props.mode}-#{@props.direction}"
-      else
-        ''
+      classes = [ @props.className, "drawer-#{@props.direction}" ]
+      if @props.open
+        classes.push "#{@props.mode}-#{@props.direction}"
 
-      div className: @props.className + ' drawer-container' + openClass,
+      div { className: classes.join ' ' },
         div className: 'drawer-content',
           div className: 'drawer-title',
             @props.title

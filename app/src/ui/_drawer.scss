@@ -1,7 +1,9 @@
 @mixin drawer($width, $topOffset: 0, $contentOffset: 50px) {
   & > .drawer-content {
-    display: none;
+    position: fixed;
     width: $width;
+    top: $topOffset;
+    bottom: 0;
 
     .scrollable {
       position: absolute;
@@ -12,15 +14,26 @@
       overflow-y: auto;
     }
   }
+  &.drawer-left > .drawer-content {
+    @include transition(left, 0.3s ease);
+    left: -1 * $width;
+  }
+  &.drawer-left > .drawer-body {
+    @include transition(margin-left, 0.3s ease);
+  }
+  &.drawer-right > .drawer-content {
+    @include transition(right, 0.3s ease);
+    right: -1 * $width;
+  }
+  &.drawer-right > .drawer-body {
+    @include transition(margin-right, 0.3s ease);
+  }
 
   &.shrink-left > .drawer-content,
   &.shunt-left > .drawer-content,
   &.float-left > .drawer-content {
     display: block;
-    position: fixed;
     left: 0;
-    top: $topOffset;
-    bottom: 0;
   }
 
   &.shrink-left > .drawer-body {
@@ -30,8 +43,7 @@
   &.shunt-left {
     overflow: hidden;
     & > .drawer-body {
-      -webkit-transform: translate3d($width, 0, 0);
-              transform: translate3d($width, 0, 0);
+      @include transform(translate3d($width, 0, 0));
     }
   }
 
@@ -43,10 +55,7 @@
   &.shunt-right > .drawer-content,
   &.float-right > .drawer-content {
     display: block;
-    position: fixed;
     right: 0;
-    top: $topOffset;
-    bottom: 0;
   }
 
   &.shrink-right > .drawer-body {
@@ -56,8 +65,7 @@
   &.shunt-right {
     overflow: hidden;
     & > .drawer-body {
-      -webkit-transform: translate3d(-1 * $width, 0, 0);
-              transform: translate3d(-1 * $width, 0, 0);
+      @include transform(translate3d(-1 * $width, 0, 0));
     }
   }
 

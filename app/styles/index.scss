@@ -8,6 +8,16 @@ body {
   -ms-touch-action: pan-y !important; /* disable double-tap-zoom */
 }
 
+@mixin transform($transform) {
+  -webkit-transform: $transform;
+          transform: $transform;
+}
+
+@mixin transition($prop, $transform) {
+  -webkit-transform: $prop $transition, -webkit-transform $transform;
+          transform: $prop $transition, transform $transform;
+}
+
 @import "../../bower_components/bootstrap-sass/lib/bootstrap";
 @import "../../bower_components/bootstrap-sass/lib/theme";
 
