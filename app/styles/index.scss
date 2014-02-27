@@ -8,7 +8,8 @@ $color5: #9C1A04;
 @import "../../bower_components/bootstrap-sass/lib/theme";
 
 @import "blokkfont";
-@import "../src/ui/drawer";
+@import "../src/ui/leftdrawer";
+@import "../src/ui/rightdrawer";
 @import "../src/ui/header";
 @import "../src/ui/subheader";
 @import "../src/ui/column";

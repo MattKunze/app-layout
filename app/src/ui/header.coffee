@@ -20,11 +20,12 @@ do (
               value: @props.columns
               onChange: @_setColumns
 
-        a
-          className: 'btn btn-link pull-left'
-          onClick: _.bind @props.toggleLeftOpen, @, null
-        ,
-          span className: 'glyphicon glyphicon-th-large'
+        unless @props.leftOpen
+          a
+            className: 'btn btn-link pull-left'
+            onClick: _.bind @props.toggleLeftOpen, @, null
+          ,
+            span className: 'glyphicon glyphicon-th-large'
 
         h4 className: 'title', 'This is the header'
 

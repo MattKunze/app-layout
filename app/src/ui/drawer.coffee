@@ -12,9 +12,8 @@ do (
       else
         ''
 
-      div className: 'drawer-container' + openClass,
+      div className: @props.className + ' drawer-container' + openClass,
         div className: 'drawer-content',
-          div className: 'title', 'Drawer'
           @props.drawerContent
         div className: 'drawer-body',
           @props.children

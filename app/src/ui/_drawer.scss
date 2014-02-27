@@ -1,25 +1,7 @@
-$drawerWidth: 200px;
-
-.drawer-container {
-
+@mixin drawer($width) {
   & > .drawer-content {
-    background-color: $color4;
     display: none;
-    width: $drawerWidth;
-
-    & > .title {
-      height: 50px;
-      background-color: lighten($color4, 10%);
-      border-bottom: 2px solid $color5;
-      padding: 10px;
-      font-size: 120%;
-      font-weight: bold;
-    }
-
-    & > .settings {
-      margin-left: 5px;
-      margin-top: 5px;
-    }
+    width: $width;
   }
 
   &.shrink-left > .drawer-content,
@@ -33,14 +15,14 @@ $drawerWidth: 200px;
   }
 
   &.shrink-left > .drawer-body {
-    margin-left: $drawerWidth;
+    margin-left: $width;
   }
 
   &.shunt-left {
     overflow: hidden;
     & > .drawer-body {
-      -webkit-transform: translate3d($drawerWidth, 0, 0);
-              transform: translate3d($drawerWidth, 0, 0);
+      -webkit-transform: translate3d($width, 0, 0);
+              transform: translate3d($width, 0, 0);
     }
   }
 

@@ -1,0 +1,23 @@
+@import "./drawer";
+
+.left-drawer {
+  @include drawer(250px);
+
+  & > .drawer-content {
+    background-color: $color4;
+
+    & > .left-content > .title {
+      height: 50px;
+      background-color: lighten($color4, 10%);
+      border-bottom: 2px solid $color5;
+      padding: 10px;
+      font-size: 120%;
+      font-weight: bold;
+    }
+
+    & > .left-content > .settings {
+      margin: 5px;
+    }
+  }
+}
+

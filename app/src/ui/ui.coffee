@@ -3,8 +3,8 @@ do (
   ipsum = require 'lorem-ipsum'
   headroom = require 'headroom.js'
   React = require 'react/addons'
-  Drawer = require './drawer'
-  DrawerSettings = require './drawersettings'
+  LeftDrawer = require './leftdrawer'
+  RightDrawer = require './rightdrawer'
   Header = require './header'
   SubHeader = require './subheader'
   Column = require './column'
@@ -39,7 +39,6 @@ do (
 
     toggleLeftOpen: (explicit) ->
       newOpen = if explicit? then explicit else not @state.leftOpen
-      console.warn "left open: #{newOpen}"
       @setState leftOpen: newOpen
 
     toggleLeftMode: (mode) ->
@@ -52,13 +51,11 @@ do (
       headroom.init()
 
     render: ->
-      Drawer
-        direction: 'left'
+      LeftDrawer
         mode: @state.leftMode
         open: @state.leftOpen
-        drawerContent: DrawerSettings
-          mode: @state.leftMode
-          toggleMode: @toggleLeftMode
+        toggleOpen: @toggleLeftOpen
+        toggleMode: @toggleLeftMode
       ,
         div
           className: classSet
@@ -69,6 +66,7 @@ do (
             columns: @state.columns
             compactHeader: @state.compactHeader
             setColumns: @setColumns
+            leftOpen: @state.leftOpen
             toggleLeftOpen: @toggleLeftOpen
           SubHeader
             compactHeader: @state.compactHeader
