@@ -4,7 +4,6 @@ $drawerWidth: 200px;
 
   & > .drawer-content {
     background-color: $color4;
-    z-index: 1000;
     display: none;
     width: $drawerWidth;
 
@@ -23,19 +22,30 @@ $drawerWidth: 200px;
     }
   }
 
-  &.shrink-left {
+  &.shrink-left > .drawer-content,
+  &.shunt-left > .drawer-content,
+  &.float-left > .drawer-content {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
 
-    & > .drawer-content {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-    }
+  &.shrink-left > .drawer-body {
+    margin-left: $drawerWidth;
+  }
 
+  &.shunt-left {
+    overflow: hidden;
     & > .drawer-body {
-      margin-left: $drawerWidth;
+      -webkit-transform: translate3d($drawerWidth, 0, 0);
+              transform: translate3d($drawerWidth, 0, 0);
     }
+  }
+
+  &.float-left > .drawer-content {
+    z-index: 1000;
   }
 }
 
