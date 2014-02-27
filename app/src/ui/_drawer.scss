@@ -1,4 +1,4 @@
-@mixin drawer($width) {
+@mixin drawer($width, $topOffset: 0) {
   & > .drawer-content {
     display: none;
     width: $width;
@@ -9,8 +9,8 @@
   &.float-left > .drawer-content {
     display: block;
     position: fixed;
-    top: 0;
     left: 0;
+    top: $topOffset;
     bottom: 0;
   }
 
@@ -29,5 +29,32 @@
   &.float-left > .drawer-content {
     z-index: 1000;
   }
+
+  &.shrink-right > .drawer-content,
+  &.shunt-right > .drawer-content,
+  &.float-right > .drawer-content {
+    display: block;
+    position: fixed;
+    right: 0;
+    top: $topOffset;
+    bottom: 0;
+  }
+
+  &.shrink-right > .drawer-body {
+    margin-right: $width;
+  }
+
+  &.shunt-right {
+    overflow: hidden;
+    & > .drawer-body {
+      -webkit-transform: translate3d(-1 * $width, 0, 0);
+              transform: translate3d(-1 * $width, 0, 0);
+    }
+  }
+
+  &.float-right > .drawer-content {
+    z-index: 1000;
+  }
+
 }
 

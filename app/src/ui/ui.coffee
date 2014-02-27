@@ -21,6 +21,8 @@ do (
       compactHeader: false
       leftMode: 'shrink'
       leftOpen: true
+      rightMode: 'shrink'
+      rightOpen: true
 
     setColumns: (count) ->
       @setState columns: Math.max 1, count
@@ -43,6 +45,13 @@ do (
 
     toggleLeftMode: (mode) ->
       @setState leftMode: mode
+
+    toggleRightOpen: (explicit) ->
+      newOpen = if explicit? then explicit else not @state.rightOpen
+      @setState rightOpen: newOpen
+
+    toggleRightMode: (mode) ->
+      @setState rightMode: mode
 
     componentDidMount: ->
       headroom = new Headroom (@getDOMNode().querySelector '.ui'),
@@ -68,16 +77,25 @@ do (
             setColumns: @setColumns
             leftOpen: @state.leftOpen
             toggleLeftOpen: @toggleLeftOpen
-          SubHeader
-            compactHeader: @state.compactHeader
-            scrollTop: @scrollTop
 
-          div className: 'column-container',
-            for index in [0...@state.columns]
-              Column
-                key: index
-                title: "Column #{index + 1}"
-                fakeContent: @fakeContent
+          RightDrawer
+            mode: @state.rightMode
+            open: @state.rightOpen
+            toggleOpen: @toggleRightOpen
+            toggleMode: @toggleRightMode
+          ,
+            SubHeader
+              compactHeader: @state.compactHeader
+              scrollTop: @scrollTop
+              rightOpen: @state.rightOpen
+              toggleRightOpen: @toggleRightOpen
+
+            div className: 'column-container',
+              for index in [0...@state.columns]
+                Column
+                  key: index
+                  title: "Column #{index + 1}"
+                  fakeContent: @fakeContent
 
     _scrollTo: (element, to, duration) ->
       return unless duration > 0

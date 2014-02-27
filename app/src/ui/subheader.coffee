@@ -1,4 +1,5 @@
 do (
+  _ = require 'lodash'
   React = require 'react/addons'
 ) ->
 
@@ -13,8 +14,14 @@ do (
           a onClick: @props.scrollTop,
             span className: 'glyphicon glyphicon-star-empty'
 
-        span className: 'title', 'This is the subheader'
+        unless @props.rightOpen
+          a
+            className: 'btn btn-link pull-right',
+            onClick: _.bind @props.toggleRightOpen, @, null
+          ,
+            span className: 'glyphicon glyphicon-search'
 
+        span className: 'title', 'This is the subheader'
 
   module.exports = SubHeader
 

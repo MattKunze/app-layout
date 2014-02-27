@@ -22,8 +22,13 @@
       color: $color5
     }
   }
+
+  & > .btn {
+    margin-top: -5px;
+    color: white;
+  }
 }
-.ui.headroom--not-top > .sub-header {
+.ui.headroom--not-top .sub-header {
   position: fixed;
   top: 0;
   left: 0;
@@ -36,7 +41,8 @@
   }
 }
 
-.drawer-container.open > .drawer-body > .ui.headroom--not-top > .sub-header {
-  left: 200px;
+.left-drawer.shrink-left .ui.headroom--not-top .sub-header,
+.left-drawer.shunt-left .ui.headroom--not-top .sub-header {
+  left: 250px;
 }
 
