@@ -1,8 +1,9 @@
 do (
+  _ = require 'lodash'
   React = require 'react'
 ) ->
 
-  { div, h4, form, label, input } = React.DOM
+  { div, span, h4, form, label, input, a } = React.DOM
 
   Header = React.createClass
     displayName: 'Header'
@@ -18,6 +19,12 @@ do (
               className: 'form-control'
               value: @props.columns
               onChange: @_setColumns
+
+        a
+          className: 'btn btn-link pull-left'
+          onClick: _.bind @props.toggleLeftOpen, @, null
+        ,
+          span className: 'glyphicon glyphicon-th-large'
 
         h4 className: 'title', 'This is the header'
 

@@ -3,6 +3,8 @@ do (
   ipsum = require 'lorem-ipsum'
   headroom = require 'headroom.js'
   React = require 'react/addons'
+  Drawer = require './drawer'
+  DrawerSettings = require './drawersettings'
   Header = require './header'
   SubHeader = require './subheader'
   Column = require './column'
@@ -17,6 +19,8 @@ do (
     getInitialState: ->
       columns: 2
       compactHeader: false
+      leftMode: 'shrink'
+      leftOpen: true
 
     setColumns: (count) ->
       @setState columns: Math.max 1, count
@@ -33,32 +37,49 @@ do (
     scrollTop: ->
       @_scrollTo document.documentElement, 0, 100
 
+    toggleLeftOpen: (explicit) ->
+      newOpen = if explicit? then explicit else not @state.leftOpen
+      console.warn "left open: #{newOpen}"
+      @setState leftOpen: newOpen
+
+    toggleLeftMode: (mode) ->
+      @setState leftMode: mode
+
     componentDidMount: ->
-      headroom = new Headroom @getDOMNode(),
+      headroom = new Headroom (@getDOMNode().querySelector '.ui'),
         offset: 50
         tolerance: 10000
       headroom.init()
 
     render: ->
-      div
-        className: classSet
-          ui: true
-          compact: @state.compactHeader
+      Drawer
+        direction: 'left'
+        mode: @state.leftMode
+        open: @state.leftOpen
+        drawerContent: DrawerSettings
+          mode: @state.leftMode
+          toggleMode: @toggleLeftMode
       ,
-        Header
-          columns: @state.columns
-          compactHeader: @state.compactHeader
-          setColumns: @setColumns
-        SubHeader
-          compactHeader: @state.compactHeader
-          scrollTop: @scrollTop
+        div
+          className: classSet
+            ui: true
+            compact: @state.compactHeader
+        ,
+          Header
+            columns: @state.columns
+            compactHeader: @state.compactHeader
+            setColumns: @setColumns
+            toggleLeftOpen: @toggleLeftOpen
+          SubHeader
+            compactHeader: @state.compactHeader
+            scrollTop: @scrollTop
 
-        div className: 'column-container',
-          for index in [0...@state.columns]
-            Column
-              key: index
-              title: "Column #{index + 1}"
-              fakeContent: @fakeContent
+          div className: 'column-container',
+            for index in [0...@state.columns]
+              Column
+                key: index
+                title: "Column #{index + 1}"
+                fakeContent: @fakeContent
 
     _scrollTo: (element, to, duration) ->
       return unless duration > 0

@@ -1,0 +1,41 @@
+$drawerWidth: 200px;
+
+.drawer-container {
+
+  & > .drawer-content {
+    background-color: $color4;
+    z-index: 1000;
+    display: none;
+    width: $drawerWidth;
+
+    & > .title {
+      height: 50px;
+      background-color: lighten($color4, 10%);
+      border-bottom: 2px solid $color5;
+      padding: 10px;
+      font-size: 120%;
+      font-weight: bold;
+    }
+
+    & > .settings {
+      margin-left: 5px;
+      margin-top: 5px;
+    }
+  }
+
+  &.shrink-left {
+
+    & > .drawer-content {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+    }
+
+    & > .drawer-body {
+      margin-left: $drawerWidth;
+    }
+  }
+}
+
