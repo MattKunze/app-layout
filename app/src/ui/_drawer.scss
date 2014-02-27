@@ -1,7 +1,16 @@
-@mixin drawer($width, $topOffset: 0) {
+@mixin drawer($width, $topOffset: 0, $contentOffset: 50px) {
   & > .drawer-content {
     display: none;
     width: $width;
+
+    .scrollable {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      top: $contentOffset + 5;
+      bottom: 5px;
+      overflow-y: scroll;
+    }
   }
 
   &.shrink-left > .drawer-content,

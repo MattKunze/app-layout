@@ -37,13 +37,15 @@ do (
       ,
         div className: 'column-inner',
           div className: 'btn-group',
-            button
-              className: classSet
-                'btn btn-default': true
-                active: @state.pinned
-              onClick: @togglePinned
-            ,
-              span className: 'glyphicon glyphicon-pushpin'
+            unless @props.disablePin
+              button
+                className: classSet
+                  'btn btn-default': true
+                  active: @state.pinned
+                onClick: @togglePinned
+              ,
+                span className: 'glyphicon glyphicon-pushpin'
+
             button className: 'btn disabled', @props.title
             button
               className: 'btn btn-default'

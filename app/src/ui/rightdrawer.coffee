@@ -3,6 +3,7 @@ do (
   React = require 'react'
   Drawer = require './drawer'
   DrawerSettings = require './drawersettings'
+  Column = require './column'
 ) ->
 
   { div, span, a } = React.DOM
@@ -14,27 +15,32 @@ do (
         direction: 'right'
         mode: @props.mode
         open: @props.open
-        drawerContent: DrawerContent
-          mode: @props.mode
-          toggleOpen: @props.toggleOpen
-          toggleMode: @props.toggleMode
+        title: Title toggleOpen: @props.toggleOpen
+        drawerContent: @transferPropsTo DrawerContent {}
       ,
         @props.children
 
-  DrawerContent = React.createClass
-
+  Title = React.createClass
     render: ->
-      div className: 'right-content',
-        div className: 'title',
-          a
-            className: 'btn btn-link pull-left'
-            onClick: _.bind @props.toggleOpen, @, false
-          ,
-            span className: 'glyphicon glyphicon-search'
-          span {}, 'Right Side'
+      div {},
+        a
+          className: 'btn btn-link pull-left'
+          onClick: _.bind @props.toggleOpen, @, false
+        ,
+          span className: 'glyphicon glyphicon-search'
+        span {}, 'Right Side'
+
+  DrawerContent = React.createClass
+    render: ->
+      div className: 'scrollable',
         DrawerSettings
           mode: @props.mode
           toggleMode: @props.toggleMode
+
+        Column
+          title: 'Search?'
+          disablePin: true
+          fakeContent: @props.fakeContent
 
   module.exports = RightDrawer
 

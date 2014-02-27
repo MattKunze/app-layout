@@ -12,8 +12,7 @@ do (
       div className: 'header',
         form className: 'form-inline pull-right',
           div className: 'form-group',
-            label {}, 'Columns'
-          div className: 'form-group',
+            label className: 'sr-only', 'Columns'
             input
               type: 'number'
               className: 'form-control'

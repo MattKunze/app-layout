@@ -14,6 +14,8 @@ do (
 
       div className: @props.className + ' drawer-container' + openClass,
         div className: 'drawer-content',
+          div className: 'drawer-title',
+            @props.title
           @props.drawerContent
         div className: 'drawer-body',
           @props.children

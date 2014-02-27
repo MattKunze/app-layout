@@ -8,7 +8,7 @@ do (
 
   DrawerSettings = React.createClass
     render: ->
-      div className: 'settings btn-group',
+      div className: 'settings btn-group btn-group-justified',
         for mode in [ 'Shrink', 'Shunt', 'Float' ]
           a
             key: mode

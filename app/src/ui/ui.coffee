@@ -17,12 +17,18 @@ do (
     displayName: 'UI'
 
     getInitialState: ->
+      width = document.body.clientWidth
+      defaultMode = switch
+        when width <= 768 then 'float'
+        when width <= 1028 then 'shunt'
+        else 'shrink'
+
       columns: 2
       compactHeader: false
-      leftMode: 'shrink'
+      leftMode: defaultMode
       leftOpen: true
-      rightMode: 'shrink'
-      rightOpen: true
+      rightMode: defaultMode
+      rightOpen: false
 
     setColumns: (count) ->
       @setState columns: Math.max 1, count
@@ -65,6 +71,7 @@ do (
         open: @state.leftOpen
         toggleOpen: @toggleLeftOpen
         toggleMode: @toggleLeftMode
+        fakeContent: @fakeContent
       ,
         div
           className: classSet
@@ -83,6 +90,7 @@ do (
             open: @state.rightOpen
             toggleOpen: @toggleRightOpen
             toggleMode: @toggleRightMode
+            fakeContent: @fakeContent
           ,
             SubHeader
               compactHeader: @state.compactHeader

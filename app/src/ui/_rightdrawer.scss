@@ -1,21 +1,17 @@
 @import "./drawer";
 
 .right-drawer {
-  @include drawer(200px, 50px);
+  @include drawer(200px, $topOffset: 50px, $contentOffset: 40px);
 
   & > .drawer-content {
     background-color: $color3;
 
-    & > .right-content > .title {
+    & > .drawer-title {
       height: 40px;
       background-color: lighten($color3, 10%);
       padding: 5px;
       font-size: 120%;
       font-weight: bold;
-    }
-
-    & > .right-content > .settings {
-      margin: 5px;
     }
   }
 }

@@ -7,13 +7,14 @@
 .column-container > .column {
   display: table-cell;
 
-  & > .column-inner {
-    margin: 5px;
-    padding: 10px;
-    background-color: #eee;
-    color: #999;
-    border: 1px solid $color3;
-  }
+}
+
+.column-inner {
+  margin: 5px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, .25);
+  color: #999;
+  border: 1px solid $color3;
 }
 
 .ui.headroom--not-top > .column-container > .column.pinned {
