@@ -4,6 +4,10 @@ $color3: #FF4626;
 $color4: #009C58;
 $color5: #9C1A04;
 
+body {
+  -ms-touch-action: pan-y !important; /* disable double-tap-zoom */
+}
+
 @import "../../bower_components/bootstrap-sass/lib/bootstrap";
 @import "../../bower_components/bootstrap-sass/lib/theme";
 

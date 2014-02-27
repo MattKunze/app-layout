@@ -42,8 +42,8 @@ do (
         count: options.count or 1
         units: options.units or 'paragraphs'
 
-    scrollTop: ->
-      @_scrollTo document.documentElement, 0, 100
+    scrollTop: (cb) ->
+      @_scrollTo 0, 100, cb
 
     toggleLeftOpen: (explicit) ->
       newOpen = if explicit? then explicit else not @state.leftOpen
@@ -54,7 +54,13 @@ do (
 
     toggleRightOpen: (explicit) ->
       newOpen = if explicit? then explicit else not @state.rightOpen
-      @setState rightOpen: newOpen
+
+      # need to be at the top of the page to open the right drawer
+      if newOpen
+        @scrollTop =>
+          @setState rightOpen: newOpen
+      else
+        @setState rightOpen: newOpen
 
     toggleRightMode: (mode) ->
       @setState rightMode: mode
@@ -62,8 +68,12 @@ do (
     componentDidMount: ->
       headroom = new Headroom (@getDOMNode().querySelector '.ui'),
         offset: 50
-        tolerance: 10000
       headroom.init()
+
+      window.addEventListener 'scroll', @_onScroll
+
+    componentWillUnmount: ->
+      window.removeEventListener 'scroll', @_onScroll
 
     render: ->
       LeftDrawer
@@ -105,16 +115,25 @@ do (
                   title: "Column #{index + 1}"
                   fakeContent: @fakeContent
 
-    _scrollTo: (element, to, duration) ->
+    _onScroll: ->
+      # hide right drawer when scrolling body content down
+      hr = Headroom.prototype
+      if hr.getScrollY() > 0 and hr.getDocumentHeight() > hr.getViewportHeight()
+        @toggleRightOpen false
+
+    _scrollTo: (to, duration, cb) ->
       return unless duration > 0
 
-      difference = to - element.scrollTop
+      hr = Headroom.prototype
+      difference = to - hr.getScrollY()
       perTick = difference / duration * 10
 
       setTimeout ( =>
-        element.scrollTop = element.scrollTop + perTick
-        if element.scrollTop > to
-          @_scrollTo element, to, duration - 10
+        window.scrollBy 0, perTick
+        if hr.getScrollY() > to
+          @_scrollTo to, duration - 10, cb
+        else
+          cb()
       ), 10
 
   module.exports = UI
